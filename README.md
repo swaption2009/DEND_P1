@@ -12,7 +12,7 @@ This data engineer project will create a Postgres database with tables designed 
 `songplays`: records in log data associated with song plays i.e. records with page NextSong
 * fields: `songplay_id`, `start_time`, `user_id`, `level`, `song_id`, `artist_id`, `session_id`, `location`, `user_agent`
 
-####Dimension Tables
+#### Dimension Tables
 1. `users`: users in the app
    * fields: `user_id`, `first_name`, `last_name`, `gender`, `level`
 2. `songs`: songs in music database
