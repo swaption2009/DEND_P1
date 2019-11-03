@@ -58,28 +58,33 @@ CREATE TABLE IF NOT EXISTS time (timestamp BIGINT NOT NULL PRIMARY KEY,
 
 songplay_table_insert = ("""
 INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s) 
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+ON CONFLICT (user_id) DO NOTHING;
 """)
 
 user_table_insert = ("""
 INSERT INTO users (user_id, first_name, last_name, gender, level)
 VALUES (%s, %s, %s, %s, %s);
+ON CONFLICT (user_id) DO UPDATE SET user_id=EXCLUDED.user_id;
 """)
 
 song_table_insert = ("""
 INSERT INTO songs (song_id, title, artist_id, year, duration)
 VALUES(%s, %s, %s, %s, %s);
+ON CONFLICT (song_id) DO UPDATE SET song_id=EXCLUDED.song_id;
 """)
 
 artist_table_insert = ("""
 INSERT INTO artists (artist_id, artist_name, artist_location, artist_latitude, artist_longitude)
-VALUES (%s, %s, %s, %s, %s);
+VALUES (%s, %s, %s, %s, %s)
+ON CONFLICT (artist_id) DO NOTHING;
 """)
 
 
 time_table_insert = ("""
 INSERT INTO time (timestamp, hour, day, weekofyear, month, year, isoweekday)
-VALUES (%s, %s, %s, %s, %s, %s, %s);
+VALUES (%s, %s, %s, %s, %s, %s, %s)
+ON CONFLICT (start_time) DO NOTHING;
 """)
 
 # FIND SONGS
